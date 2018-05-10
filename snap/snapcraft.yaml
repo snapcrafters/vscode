@@ -13,10 +13,23 @@ confinement: classic
 parts:
   vscode:
     plugin: dump
-    source: https://go.microsoft.com/fwlink/?LinkID=760868
+    source:
+      - on amd64: https://go.microsoft.com/fwlink/?LinkID=760868
+      - on i386: https://go.microsoft.com/fwlink/?LinkID=760680
+      - on arm64: fail
+      - on armhf: fail
     source-type: deb
     override-build: |
-      DEB_API="https://go.microsoft.com/fwlink/?LinkID=760868"
+      ARCHITECTURE=$(dpkg --print-architecture)
+      if [ "${ARCHITECTURE}" = "amd64" ]; then
+        DEB_API="https://go.microsoft.com/fwlink/?LinkID=760868"
+      elif [ "${ARCHITECTURE}" = "i386" ]; then
+        DEB_API="https://go.microsoft.com/fwlink/?LinkID=760680"
+      else
+        echo "ERROR! Visual Studio Code only produces debs for amd64 and i386. Failing the build here."
+        exit 1
+      fi
+
       DEB_URL=$(curl -w "%{url_effective}\n" -I -L -s -S "${DEB_API}" -o /dev/null)
       VERSION=$(echo "${DEB_URL}" | cut -d'_' -f2)
       echo $VERSION > $SNAPCRAFT_STAGE/version
@@ -27,10 +40,9 @@ parts:
     build-packages:
       # Visual Studio Code is only publishes debs for amd64,
       # so fail the build on other architectures.
-      - on amd64:
-        - curl
-        - sed
-      - else fail
+      - curl
+      - dpkg
+      - sed
     stage-packages:
       - libasound2
       - libgconf2-4
