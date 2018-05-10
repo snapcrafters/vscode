@@ -24,6 +24,13 @@ parts:
       # Correct path to icon.
       sed -i 's|Icon=code|Icon=/usr/share/pixmaps/code\.png|g' usr/share/applications/code.desktop
       snapcraftctl build
+    build-packages:
+      # Visual Studio Code is only publishes debs for amd64,
+      # so fail the build on other architectures.
+      - on amd64:
+        - curl
+        - sed
+      - else fail
     stage-packages:
       - libasound2
       - libgconf2-4
