@@ -14,6 +14,8 @@ parts:
   vscode:
     plugin: dump
     source:
+      # Visual Studio Code is only available for i386 (x86) and amd64 (x86_64),
+      # so fail the build on other architectures.
       - on amd64: https://go.microsoft.com/fwlink/?LinkID=760868
       - on i386: https://go.microsoft.com/fwlink/?LinkID=760680
       - on arm64: fail
@@ -38,8 +40,6 @@ parts:
       sed -i 's|Icon=code|Icon=/usr/share/pixmaps/code\.png|g' usr/share/applications/code.desktop
       snapcraftctl build
     build-packages:
-      # Visual Studio Code is only publishes debs for amd64,
-      # so fail the build on other architectures.
       - curl
       - dpkg
       - sed
