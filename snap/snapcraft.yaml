@@ -63,3 +63,17 @@ apps:
   vscode:
     command: bin/electron-launch ${SNAP}/usr/share/code/bin/code
     desktop: usr/share/applications/code.desktop
+
+plugs:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
