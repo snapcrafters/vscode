@@ -23,6 +23,7 @@ parts:
       - on amd64: https://go.microsoft.com/fwlink/?LinkID=760868
       - on i386: https://go.microsoft.com/fwlink/?LinkID=760680
     source-type: deb
+    build-attributes: [no-patchelf]
     override-build: |
       ARCHITECTURE=$(dpkg --print-architecture)
       if [ "${ARCHITECTURE}" = "amd64" ]; then
