@@ -45,18 +45,6 @@ parts:
       - curl
       - dpkg
       - sed
-    stage-packages:
-      - libasound2
-      - libgconf2-4
-      - libgtk-3-0
-      - libnotify4
-      - libnspr4
-      - libnss3
-      - libpcre3
-      - libpulse0
-      - libsecret-1-0
-      - libxss1
-      - libxtst6
   electron-launch:
     plugin: dump
     source: files/
