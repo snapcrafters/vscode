@@ -46,6 +46,7 @@ parts:
       - dpkg
       - sed
     stage-packages:
+      - fcitx-frontend-gtk3
       - libasound2
       - libgconf2-4
       - libgtk-3-0
