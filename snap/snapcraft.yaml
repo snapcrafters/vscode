@@ -76,8 +76,16 @@ parts:
 apps:
   vscode:
     command: bin/electron-launch ${SNAP}/usr/share/code/bin/code
+
     desktop: usr/share/applications/code.desktop
+    environment:
+      # Fallback to XWayland if running in a Wayland session.
+      DISABLE_WAYLAND: 1
 
   url-handler:
     command: bin/electron-launch ${SNAP}/usr/share/code/bin/code --open-url
     desktop: usr/share/applications/code-url-handler.desktop
+    environment:
+      # Fallback to XWayland if running in a Wayland session.
+      DISABLE_WAYLAND: 1
+
