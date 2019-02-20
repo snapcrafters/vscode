@@ -69,23 +69,22 @@ parts:
       - libsecret-1-0
       - libxss1
       - libxtst6
-  electron-launch:
-    plugin: dump
-    source: files/
 
 apps:
   vscode:
-    command: bin/electron-launch ${SNAP}/usr/share/code/bin/code
-
+    command: usr/share/code/bin/code
     desktop: usr/share/applications/code.desktop
     environment:
       # Fallback to XWayland if running in a Wayland session.
       DISABLE_WAYLAND: 1
+      GDK_PIXBUF_MODULEDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders
+      GSETTINGS_SCHEMA_DIR: $SNAP/usr/share/glib-2.0/schemas
 
   url-handler:
-    command: bin/electron-launch ${SNAP}/usr/share/code/bin/code --open-url
+    command: usr/share/code/bin/code --open-url
     desktop: usr/share/applications/code-url-handler.desktop
     environment:
       # Fallback to XWayland if running in a Wayland session.
       DISABLE_WAYLAND: 1
-
+      GDK_PIXBUF_MODULEDIR: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders
+      GSETTINGS_SCHEMA_DIR: $SNAP/usr/share/glib-2.0/schemas
