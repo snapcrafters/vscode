@@ -72,6 +72,13 @@ parts:
       - libxss1
       - libxtst6
       - zlib1g
+    prime:
+      - -usr/share/doc
+      - -usr/share/fonts
+      - -usr/share/icons
+      - -usr/share/lintian
+      - -usr/share/man
+
   wrapper:
     after:
       - vscode
