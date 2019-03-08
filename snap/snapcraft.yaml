@@ -57,8 +57,11 @@ parts:
       - sed
     stage-packages:
       - fcitx-frontend-gtk3
+      - gvfs-libs
       - libasound2
-      - libgconf2-4
+      - libgconf-2-4
+      - libglib2.0-bin
+      - libgnome-keyring0
       - libgtk-3-0
       - libnotify4
       - libnspr4
@@ -68,6 +71,7 @@ parts:
       - libsecret-1-0
       - libxss1
       - libxtst6
+      - zlib1g
   wrapper:
     after:
       - vscode
