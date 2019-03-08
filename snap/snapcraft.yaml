@@ -22,7 +22,6 @@ parts:
     override-pull: |
       add-apt-repository -y ppa:ubuntu-desktop/gnome-3-26
       apt -y update
-      apt -y upgrade
 
   vscode:
     after:
