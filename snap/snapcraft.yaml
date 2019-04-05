@@ -22,6 +22,7 @@ parts:
     override-pull: |
       add-apt-repository -y ppa:ubuntu-desktop/gnome-3-26
       apt -y update
+      apt -y upgrade
 
   vscode:
     after:
@@ -49,7 +50,8 @@ parts:
       echo $VERSION > $SNAPCRAFT_STAGE/version
 
       # Correct path to icon.
-      sed -i 's|Icon=code|Icon=/usr/share/pixmaps/code\.png|g' usr/share/applications/code.desktop
+      sed -i 's|Icon=com\.visualstudio\.code|Icon=/usr/share/pixmaps/com\.visualstudio\.code\.png|g' usr/share/applications/code.desktop
+      sed -i 's|Icon=com\.visualstudio\.code|Icon=/usr/share/pixmaps/com\.visualstudio\.code\.png|g' usr/share/applications/code-url-handler.desktop
       snapcraftctl build
     build-packages:
       - curl
@@ -71,6 +73,7 @@ parts:
       - libsecret-1-0
       - libxss1
       - libxtst6
+      - yad
       - zlib1g
     prime:
       - -usr/share/doc

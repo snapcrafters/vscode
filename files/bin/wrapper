@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+MIGRATION_TITLE="Migrate to the code snap"
+MIGRATION_TEXT="This snap was maintained by the Snapcrafters community, <i>but will not be getting any further updates</i>.\
+\\n\\n\
+<b>Microsoft is now publishing an official snap of Visual Studio Code</b>, you should migrate to the Code using these commands:\
+\\n\\n\
+<tt>snap remove vscode</tt>\\n\
+<tt>snap install code</tt>\
+\\n\\n\
+Your Code <u>preferences and extensions will be preserved</u>. You can read more about the official Visual Studio Code snap on its store page: \
+\\n\\n\
+https://snapcraft.io/code"
+
 # On Fedora $SNAP is under /var and there is some magic to map it to /snap.
 # We need to handle that case and reset $SNAP
 SNAP=$(echo $SNAP | sed -e "s|/var/lib/snapd||g")
@@ -30,5 +42,13 @@ fi
 
 # Create $XDG_RUNTIME_DIR if not exists (to be removed when https://pad.lv/1656340 is fixed)
 [ -n "$XDG_RUNTIME_DIR" ] && mkdir -p $XDG_RUNTIME_DIR -m 700
+
+# Display migration alert
+$SNAP/usr/bin/yad \
+  --title="${MIGRATION_TITLE}" \
+  --text="${MIGRATION_TEXT}" \
+  --center \
+  --on-top \
+  --fixed
 
 exec "$@"
